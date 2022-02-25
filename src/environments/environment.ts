@@ -3,7 +3,25 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  firebase: {
+    projectId: 'login-angular-b1140',
+    appId: '1:455053940609:web:dd44bcb3005765ed32fa80',
+    storageBucket: 'login-angular-b1140.appspot.com',
+    apiKey: 'AIzaSyBrlDXO6XR7tdS4bfzFKMY_Zni4aaePAWo',
+    authDomain: 'login-angular-b1140.firebaseapp.com',
+    messagingSenderId: '455053940609',
+    measurementId: 'G-T04RR31QSC',
+  },
+  production: false,
+  firebaseConfig : {
+    apiKey: "AIzaSyBrlDXO6XR7tdS4bfzFKMY_Zni4aaePAWo",
+    authDomain: "login-angular-b1140.firebaseapp.com",
+    projectId: "login-angular-b1140",
+    storageBucket: "login-angular-b1140.appspot.com",
+    messagingSenderId: "455053940609",
+    appId: "1:455053940609:web:dd44bcb3005765ed32fa80",
+    measurementId: "G-T04RR31QSC"
+  }
 };
 
 /*

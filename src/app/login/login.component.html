@@ -1,0 +1,75 @@
+<div class="container">
+
+    <form class="card text-center p-5">
+      <h1>INGRESO</h1>
+
+      <div class="mb-3">
+        <label class="form-label" style="float: left"> Email </label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="ejemplo@mail.com"
+          [formControl]="emailLoginControl"
+        />
+      </div>
+      <div>
+        <p
+          *ngIf="emailLoginControl.errors && emailLoginControl.dirty"
+          style="margin: -3%"
+        >
+          <small
+            *ngIf="emailLoginControl.hasError('required')"
+            style="color: red"
+            >El email no puede estar vacío</small
+          >
+          <small
+            *ngIf="emailLoginControl.hasError('pattern')"
+            style="color: red"
+            >Respete el formato de email</small
+          >
+        </p>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" style="float: left"> Contraseña </label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="********"
+          [formControl]="passwordLoginControl"
+        />
+        <p
+          *ngIf="passwordLoginControl.errors && passwordLoginControl.dirty"
+          style="margin-bottom: -2%"
+        >
+          <small
+            *ngIf="passwordLoginControl.hasError('required')"
+            style="color: red"
+            >Ingrese una contraseña</small
+          >
+          <small
+            *ngIf="passwordLoginControl.hasError('pattern')"
+            style="color: red"
+            >Formato no aceptado</small
+          >
+        </p>
+      </div>
+
+      <button
+        [disabled]="emailLoginControl.invalid || passwordLoginControl.invalid"
+        class="btn btn-primary btn-block m-1"
+        (click)="getLogin($event)"
+      >
+        Ingresar
+      </button>
+
+
+
+      <label style="float: left"
+        >No eres usuario aún?
+        <a routerLink="/registro" 
+          ><strong>Registrate</strong></a
+        ></label
+      >
+    </form>
+
+</div>

@@ -1,0 +1,170 @@
+<div class="container" style="margin-top: 2%;">
+  <form class="card text-center p-5">
+    <h1>REGISTRO</h1>
+
+    <div class="mb-3">
+      <label class="form-label" style="float: left"> Nombre* </label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="nombre"
+        [formControl]="nombreRegistroControl"
+      />
+    </div>
+
+    <div>
+      <p
+        *ngIf="nombreRegistroControl.errors && nombreRegistroControl.dirty"
+        style="margin: -4%"
+      >
+        <small
+          *ngIf="nombreRegistroControl.hasError('required')"
+          style="color: red"
+          >El nombre no puede ir vacío</small
+        >
+        <small
+          *ngIf="nombreRegistroControl.hasError('pattern')"
+          style="color: red"
+          >Solo se permiten caracteres de la A a la Z</small
+        >
+      </p>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" style="float: left"> Apellido* </label>
+      <input
+        type="text"
+        class="form-control"
+        usuarioRegistroaceholder="apellido"
+        placeholder="apellido"
+        [formControl]="apellidoRegistroControl"
+      />
+    </div>
+
+    <div>
+      <p
+        *ngIf="apellidoRegistroControl.errors && apellidoRegistroControl.dirty"
+        style="margin: -4%"
+      >
+        <small
+          *ngIf="apellidoRegistroControl.hasError('required')"
+          style="color: red"
+          >El apellido no puede ir vacío</small
+        >
+        <small
+          *ngIf="apellidoRegistroControl.hasError('pattern')"
+          style="color: red"
+          >Solo se permiten caracteres de la A a la Z</small
+        >
+      </p>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" style="float: left"> Email* </label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="ejemplo@mail.com"
+        [formControl]="emailRegistroControl"
+      />
+    </div>
+
+    <div>
+      <p
+        *ngIf="emailRegistroControl.errors && emailRegistroControl.dirty"
+        style="margin: -4%"
+      >
+        <small
+          *ngIf="emailRegistroControl.hasError('required')"
+          style="color: red"
+          >El apellido no puede ir vacío</small
+        >
+        <small
+          *ngIf="emailRegistroControl.hasError('pattern')"
+          style="color: red"
+          >Solo se permiten caracteres de la A a la Z</small
+        >
+      </p>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" style="float: left"> Contraseña* </label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="********"
+        [formControl]="passwordRegistroControl"
+      />
+    </div>
+
+    <div>
+      <p
+        *ngIf="passwordRegistroControl.errors && passwordRegistroControl.dirty"
+      >
+        <small
+          *ngIf="passwordRegistroControl.hasError('required')"
+          style="color: red"
+          >La contraseña no puede ir vacía</small
+        >
+        <small
+          *ngIf="passwordRegistroControl.hasError('minlength')"
+          style="color: red"
+          >La contraseña debe tener al menos 6 caracteres</small
+        >
+        <br />
+        <small
+          *ngIf="passwordRegistroControl.hasError('pattern')"
+          style="color: red; justify-self: unset"
+          >La contraseña debe tener un caracter en <strong>mayúscula</strong>,
+          uno en <strong>minúscula</strong>, y un <strong>número</strong></small
+        >
+      </p>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" style="float: left">
+        Confirmar contraseña*
+      </label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="********"
+        [formControl]="passwordValidate"
+      />
+    </div>
+
+    <div>
+      <p
+        *ngIf="
+          !compararContrasenias(
+            passwordRegistroControl.value,
+            passwordValidate.value
+          )
+        "
+        style="margin: -4%"
+      >
+        <small style="color: red">Las contraseñas no coinciden</small>
+      </p>
+    </div>
+
+    <label style="text-align: left; color: red">*Campos obligatorios</label>
+    <button
+      class="btn btn-primary btn-block mt-3"
+      [disabled]="
+        emailRegistroControl.invalid ||
+        passwordRegistroControl.invalid ||
+        nombreRegistroControl.invalid ||
+        apellidoRegistroControl.invalid
+      "
+      (click)="getRegistro($event)"
+    >
+      Registrar
+    </button>
+
+    
+    <label style="float: left"
+      >Ya eres usuario? Volver al
+      <a routerLink="/login" ><strong>Ingreso</strong></a></label
+    >
+  </form>
+</div>

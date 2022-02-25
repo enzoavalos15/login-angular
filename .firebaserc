@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "login-angular-b1140": {
+      "hosting": {
+        "desafio": [
+          "login-angular-b1140"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "login-angular-b1140"
+  }
+}
