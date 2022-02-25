@@ -8,22 +8,22 @@
         type="text"
         class="form-control"
         placeholder="nombre"
-        [formControl]="nombreRegistroControl"
+        [formControl]="nombre"
       />
     </div>
 
     <div>
       <p
-        *ngIf="nombreRegistroControl.errors && nombreRegistroControl.dirty"
+        *ngIf="nombre.errors && nombre.dirty"
         style="margin: -4%"
       >
         <small
-          *ngIf="nombreRegistroControl.hasError('required')"
+          *ngIf="nombre.hasError('required')"
           style="color: red"
           >El nombre no puede ir vacío</small
         >
         <small
-          *ngIf="nombreRegistroControl.hasError('pattern')"
+          *ngIf="nombre.hasError('pattern')"
           style="color: red"
           >Solo se permiten caracteres de la A a la Z</small
         >
@@ -35,24 +35,23 @@
       <input
         type="text"
         class="form-control"
-        usuarioRegistroaceholder="apellido"
         placeholder="apellido"
-        [formControl]="apellidoRegistroControl"
+        [formControl]="apellido"
       />
     </div>
 
     <div>
       <p
-        *ngIf="apellidoRegistroControl.errors && apellidoRegistroControl.dirty"
+        *ngIf="apellido.errors && apellido.dirty"
         style="margin: -4%"
       >
         <small
-          *ngIf="apellidoRegistroControl.hasError('required')"
+          *ngIf="apellido.hasError('required')"
           style="color: red"
           >El apellido no puede ir vacío</small
         >
         <small
-          *ngIf="apellidoRegistroControl.hasError('pattern')"
+          *ngIf="apellido.hasError('pattern')"
           style="color: red"
           >Solo se permiten caracteres de la A a la Z</small
         >
@@ -65,26 +64,46 @@
         type="email"
         class="form-control"
         placeholder="ejemplo@mail.com"
-        [formControl]="emailRegistroControl"
+        [formControl]="email"
       />
     </div>
 
     <div>
       <p
-        *ngIf="emailRegistroControl.errors && emailRegistroControl.dirty"
+        *ngIf="email.errors && email.dirty"
         style="margin: -4%"
       >
         <small
-          *ngIf="emailRegistroControl.hasError('required')"
+          *ngIf="email.hasError('required')"
           style="color: red"
-          >El apellido no puede ir vacío</small
+          >El email no puede ir vacío</small
         >
         <small
-          *ngIf="emailRegistroControl.hasError('pattern')"
+          *ngIf="email.hasError('pattern')"
           style="color: red"
-          >Solo se permiten caracteres de la A a la Z</small
+          >Respete el formato de email</small
         >
       </p>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" style="float: left"> Dirección de billetera virtual </label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="direccion"
+        [formControl]="wallet"
+      />
+    </div>
+
+    <div>
+
+        <small
+          *ngIf="wallet.hasError('pattern')"
+          style="color: red"
+          >Solo se permiten caracteres alfanumericos</small
+        >
+
     </div>
 
     <div class="mb-3">
@@ -93,27 +112,27 @@
         type="password"
         class="form-control"
         placeholder="********"
-        [formControl]="passwordRegistroControl"
+        [formControl]="password"
       />
     </div>
 
     <div>
       <p
-        *ngIf="passwordRegistroControl.errors && passwordRegistroControl.dirty"
+        *ngIf="password.errors && password.dirty"
       >
         <small
-          *ngIf="passwordRegistroControl.hasError('required')"
+          *ngIf="password.hasError('required')"
           style="color: red"
           >La contraseña no puede ir vacía</small
         >
         <small
-          *ngIf="passwordRegistroControl.hasError('minlength')"
+          *ngIf="password.hasError('minlength')"
           style="color: red"
           >La contraseña debe tener al menos 6 caracteres</small
         >
         <br />
         <small
-          *ngIf="passwordRegistroControl.hasError('pattern')"
+          *ngIf="password.hasError('pattern')"
           style="color: red; justify-self: unset"
           >La contraseña debe tener un caracter en <strong>mayúscula</strong>,
           uno en <strong>minúscula</strong>, y un <strong>número</strong></small
@@ -137,7 +156,7 @@
       <p
         *ngIf="
           !compararContrasenias(
-            passwordRegistroControl.value,
+            password.value,
             passwordValidate.value
           )
         "
@@ -151,12 +170,16 @@
     <button
       class="btn btn-primary btn-block mt-3"
       [disabled]="
-        emailRegistroControl.invalid ||
-        passwordRegistroControl.invalid ||
-        nombreRegistroControl.invalid ||
-        apellidoRegistroControl.invalid
+        email.invalid ||
+        password.invalid ||
+        nombre.invalid ||
+        apellido.invalid ||
+        !compararContrasenias(
+          password.value,
+          passwordValidate.value
+        )
       "
-      (click)="getRegistro($event)"
+      (click)="registrar()"
     >
       Registrar
     </button>

@@ -8,12 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Login } from './login/login.component';
 import { Navbar } from './navbar/navbar.component';
 
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+
 import { Registro } from './register/register.component';
 import { Inicio } from './inicio/inicio.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+
 
 @NgModule({
   declarations: [
@@ -29,11 +30,11 @@ import { Inicio } from './inicio/inicio.component';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [],
+  providers: [
+    AngularFireAuth
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

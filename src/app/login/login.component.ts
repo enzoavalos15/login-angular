@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -16,16 +17,17 @@ export class Login {
     email:
     /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
     password: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/,
+    wallet: /^[a-z0-9]+$/i
   }
 
   
   //creacion de las forms control
 
-  emailLoginControl = new FormControl('', [
+  email = new FormControl('', [
     Validators.required,
     Validators.pattern(this.validaciones.email),
   ]);
-  passwordLoginControl = new FormControl('', [
+  password = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
     Validators.pattern(this.validaciones.password),
@@ -33,17 +35,21 @@ export class Login {
 
 
   //constructor donde observamos los cambios generados en el html y son confirmados despues de 800ms
-  constructor() {
-    this.emailLoginControl.valueChanges.pipe(debounceTime(800));
-    this.passwordLoginControl.valueChanges.pipe(debounceTime(800));
+  constructor(private authService: AuthService) {
 
   }
 
   //carga los datos del usuario a ingresar ------ proxima implementacion hacia un sistema para guardado
-  getLogin(e: Event) {
-    e.preventDefault();
-    console.log(this.emailLoginControl.value);
-    console.log(this.passwordLoginControl.value);
+  ingresar() {
+ 
+    console.log(this.email.value);
+    console.log(this.password.value);
+
+      this.authService.login(this.email.value, this.password.value).then(res => {
+        console.log('Login exitoso', res);
+        
+      })
+
   }
 
   

@@ -9,21 +9,21 @@
           type="email"
           class="form-control"
           placeholder="ejemplo@mail.com"
-          [formControl]="emailLoginControl"
+          [formControl]="email"
         />
       </div>
       <div>
         <p
-          *ngIf="emailLoginControl.errors && emailLoginControl.dirty"
+          *ngIf="email.errors && email.dirty"
           style="margin: -3%"
         >
           <small
-            *ngIf="emailLoginControl.hasError('required')"
+            *ngIf="email.hasError('required')"
             style="color: red"
             >El email no puede estar vacío</small
           >
           <small
-            *ngIf="emailLoginControl.hasError('pattern')"
+            *ngIf="email.hasError('pattern')"
             style="color: red"
             >Respete el formato de email</small
           >
@@ -35,19 +35,19 @@
           type="password"
           class="form-control"
           placeholder="********"
-          [formControl]="passwordLoginControl"
+          [formControl]="password"
         />
         <p
-          *ngIf="passwordLoginControl.errors && passwordLoginControl.dirty"
+          *ngIf="password.errors && password.dirty"
           style="margin-bottom: -2%"
         >
           <small
-            *ngIf="passwordLoginControl.hasError('required')"
+            *ngIf="password.hasError('required')"
             style="color: red"
             >Ingrese una contraseña</small
           >
           <small
-            *ngIf="passwordLoginControl.hasError('pattern')"
+            *ngIf="password.hasError('pattern')"
             style="color: red"
             >Formato no aceptado</small
           >
@@ -55,9 +55,9 @@
       </div>
 
       <button
-        [disabled]="emailLoginControl.invalid || passwordLoginControl.invalid"
+        [disabled]="email.invalid || password.invalid"
         class="btn btn-primary btn-block m-1"
-        (click)="getLogin($event)"
+        (click)="ingresar()"
       >
         Ingresar
       </button>
