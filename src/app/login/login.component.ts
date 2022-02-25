@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class Login {
 
+  //validaciones con expresiones regulares
   validaciones = {
     nombre: /^[a-z ]+$/i,
     apellido: /^[a-z ]+$/i,
@@ -21,7 +22,7 @@ export class Login {
   }
 
   
-  //creacion de las forms control
+  //creacion de las forms control y aplicacion de validaciones
 
   email = new FormControl('', [
     Validators.required,
@@ -34,19 +35,18 @@ export class Login {
   ]);
 
 
-  //constructor donde observamos los cambios generados en el html y son confirmados despues de 800ms
   constructor(private authService: AuthService) {
 
   }
 
-  //carga los datos del usuario a ingresar ------ proxima implementacion hacia un sistema para guardado
+  //carga los datos del usuario a ingresar y muestra por consola el objeto si es exitoso
   ingresar() {
  
     console.log(this.email.value);
     console.log(this.password.value);
 
       this.authService.login(this.email.value, this.password.value).then(res => {
-        console.log('Login exitoso', res);
+        console.log('', res);
         
       })
 

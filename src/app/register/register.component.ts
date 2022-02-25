@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { RouterEvent, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['../app.component.css'],
 })
 export class Registro {
+
+  //validaciones con expresiones regulares
   validaciones = {
     nombre: /^[a-z ]+$/i,
     apellido: /^[a-z ]+$/i,
@@ -16,6 +19,9 @@ export class Registro {
     password: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/,
     wallet: /^[a-z0-9]+$/i,
   };
+
+
+  //creacion de atributos y recepcion con formcontrol mas validaciones
 
   nombre = new FormControl('', [
     Validators.required,
@@ -41,6 +47,8 @@ export class Registro {
 
   constructor(private authService: AuthService) {}
 
+
+  //Carga al usuario registrado muestra los datos por consola y mensajes de error 
   registrar() {
     console.log(this.nombre.value);
     console.log(this.apellido.value);
@@ -53,6 +61,8 @@ export class Registro {
       .then((res) => {
         console.log('Registro con éxito', res);
       });
+
+
   }
 
   //metodo para realizar la validacion de contraseñas en el registro
@@ -60,4 +70,5 @@ export class Registro {
   compararContrasenias(contra1: string, contra2: string): boolean {
     return contra1 == contra2;
   }
+
 }
